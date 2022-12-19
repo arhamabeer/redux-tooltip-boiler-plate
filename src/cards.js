@@ -1,14 +1,15 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
-import { add } from "./REDUX/SLICE/cartSlice";
+import { add, remove } from "./REDUX/SLICE/cartSlice";
 
-function Cards({ item }) {
+function Cards({ item, btn }) {
   let { title, image, description, id } = item;
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(add(id));
+    console.log(btn);
+    btn === "DELETE" ? dispatch(remove(id)) : dispatch(add(item));
   };
 
   return (
@@ -23,7 +24,7 @@ function Cards({ item }) {
             handleClick();
           }}
         >
-          Add To Cart
+          {btn}
         </Button>
       </Card.Body>
     </Card>
